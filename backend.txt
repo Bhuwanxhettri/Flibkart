@@ -11,3 +11,13 @@
 5) Nodemon which helps donot refersh server
     -> npm i nodemon
    -> add "start":"nodemon index.js", now we running nondemon server
+
+     (🤩 in backend case while importing we should write extendion compulsary)
+
+6) mongoose libray for connecting database
+   -> npm i mongoose
+
+
+-----------------------------------------------------------------------------------
+
+7) npm i dontenv  (to make env file ) (we never push .env file in guthub or while production)
