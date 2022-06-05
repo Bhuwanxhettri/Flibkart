@@ -1,0 +1,13 @@
+1) First make package.json file  😊
+    -> npm init
+2) Then make make server with express 😎
+    -> npm i express
+3) Make some change in package.json file 
+    -> add type:module object 😋 this for making or calling server index.js file
+    
+4) Make some change in package.json file
+    -> add "start":"node index.js",
+
+5) Nodemon which helps donot refersh server
+    -> npm i nodemon
+   -> add "start":"nodemon index.js", now we running nondemon server
