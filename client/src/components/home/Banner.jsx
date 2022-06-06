@@ -29,8 +29,9 @@ export default function Banner() {
         responsive={responsive}
         swipeable={false}
         draggable={false}
-        infinite={true}
+        autoPlay={true}
         autoPlaySpeed={2000}
+        infinite={true}
       >
         {bannerData.map((data) => (
           <img src={data.url} alt="banner" />
