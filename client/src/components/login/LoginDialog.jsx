@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { Dialog, Box, TextField, Typography, Button } from "@mui/material";
+import { Dialog, Box, TextField, Typography} from "@mui/material";
 
-const accountInitailValues={
+import { authenticateSignup } from "../../service/api";
+
+const accountInitialValues={
     login:{
         view:'login',
         heading:'Login',
@@ -15,18 +17,37 @@ const accountInitailValues={
     }
 }
 
+const signupInitialValue={
+  firstname:'',
+  lastname:'',
+  username:'',
+  email:'',
+  password:'',
+  phone:''
+}
+
 export default function LoginDialog({ open, setOpen }) {
+
+  const [account,toggleAccount]=useState(accountInitialValues.login);
+  const [signup,setSignup] = useState(signupInitialValue);
 
   const handleClose = () => {
     setOpen(false);
-    toggleAccount(accountInitailValues.login);
+    toggleAccount(accountInitialValues.login);
   };
-  const [account,toggleAccount]=useState(accountInitailValues.login);
 
   const toggleSignup =()=>{
-    toggleAccount(accountInitailValues.signup);
+    toggleAccount(accountInitialValues.signup);
   }
 
+  const onInputChange =(e)=>{
+     setSignup({...signup,[e.target.name]:e.target.value});
+    // we use spread operator coz to avoid overide user input value by arry destructruing
+  }
+
+  const signupUser=async ()=>{
+      let response=  await authenticateSignup(signup);
+  }
   return (
     <>
       <Dialog open={open} onClose={handleClose}>
@@ -57,17 +78,19 @@ export default function LoginDialog({ open, setOpen }) {
             :
 
                 <Box className="px-5 py-10 w-12/12">
-                    <TextField variant="standard" className="w-full px-2 " label="Enter First Name" />
+                    <TextField variant="standard" className="w-full px-2 " name="firstname" onChange={(e)=>onInputChange(e)} label="Enter First Name" />
                     <div className="py-2"></div>
-                    <TextField variant="standard" className="w-full px-2 " label="Enter Last Name" />
+                    <TextField variant="standard" className="w-full px-2 " name="lastname" onChange={(e)=>onInputChange(e)}  label="Enter Last Name" />
                     <div className="py-2"></div>
-                    <TextField variant="standard" className="w-full px-2 " label="Enter Email" />
+                    <TextField variant="standard" className="w-full px-2 " name="username" onChange={(e)=>onInputChange(e)}  label="Enter User Name" />
                     <div className="py-2"></div>
-                    <TextField variant="standard" className="w-full px-2" label="Enter Password" />
+                    <TextField variant="standard" className="w-full px-2 " name="email" onChange={(e)=>onInputChange(e)} label="Enter Email" />
                     <div className="py-2"></div>
-                    <TextField variant="standard" className="w-full px-2" label="Pnone Number"/>
+                    <TextField variant="standard" className="w-full px-2" name="password" onChange={(e)=>onInputChange(e)}  label="Enter Password" />
+                    <div className="py-2"></div>
+                    <TextField variant="standard" className="w-full px-2" name="phone" onChange={(e)=>onInputChange(e)} label="Phone Number"/>
                  
-                    <button type="button" class="inline-block mt-6 px-6 py-2.5 bg-orange-500 w-full text-white font-semibold text-md leading-tight  rounded shadow-md hover:bg-orange-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-orange-700 active:shadow-lg transition duration-150 ease-in-out">Continue</button>
+                    <button type="button" onClick={()=>signupUser()} class="inline-block mt-6 px-6 py-2.5 bg-orange-500 w-full text-white font-semibold text-md leading-tight  rounded shadow-md hover:bg-orange-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-orange-700 active:shadow-lg transition duration-150 ease-in-out">Continue</button>
                 </Box>
 
           }

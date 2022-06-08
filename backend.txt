@@ -21,3 +21,9 @@
 -----------------------------------------------------------------------------------
 
 7) npm i dontenv  (to make env file ) (we never push .env file in guthub or while production)
+
+8) npm i cors (for solving cors problem);
+
+9) npm i body-parser (for solving body parser of post api in user-controller eg);
+    -> express doesnot body parser we have to install manually
+    -> we have to parse both data and url both  in index.js file through express
